@@ -1,0 +1,2 @@
+#ira ignorar os arquivos node_modules do npm
+node_modules/*
