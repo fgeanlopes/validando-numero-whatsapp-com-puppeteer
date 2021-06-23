@@ -4,7 +4,7 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
-app.post('/checkNumber', async (resquest, response) => {
+app.post('/', async (resquest, response) => {
 
   let number = resquest.headers.number;
 
