@@ -10,6 +10,8 @@ var jsonParser = bodyParser.json()
 
 app.post('/', jsonParser, async (resquest, response) => {
 
+  console.log('entrada post -->', resquest.body);
+
   const browser = await puppeteer.launch({headless: true});
   const page = await browser.newPage();
 
