@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const express = require('express');
 const app = express();
+app.use(cors());
 
 app.post('/checkNumber', async (resquest, response) => {
 
