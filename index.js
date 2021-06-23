@@ -1,19 +1,21 @@
 const puppeteer = require('puppeteer');
 const express = require('express');
 const cors = require('cors');
+var bodyParser = require('body-parser')
+
 const app = express();
 app.use(cors());
 
-app.post('/', async (resquest, response) => {
+var jsonParser = bodyParser.json()
 
-  let number = resquest.headers.number;
+app.post('/', jsonParser, async (resquest, response) => {
 
   const browser = await puppeteer.launch({headless: true});
   const page = await browser.newPage();
 
   await page.goto('https://watools.io/check-numbers');
   await page.select('[ng-model="countryDialCode"]','string:+55');
-  await page.type('[ng-model="phone"]', `${number}`);
+  await page.type('[ng-model="phone"]', `${resquest.body.number}`);
   await page.click('[ng-click="checkNumber()"]');
 
   results = {};
@@ -30,8 +32,8 @@ app.post('/', async (resquest, response) => {
       })
     })
   }
-
   results = await getData();
+  
   response.json(results);
   await browser.close();
 });
