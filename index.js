@@ -10,6 +10,8 @@ var jsonParser = bodyParser.json()
 
 app.post('/check', jsonParser, async (resquest, response) => {
 
+  console.log('teste');
+
   const browser = await puppeteer.launch({headless: true, args: ["--no-sandbox", "--disable-setuid-sandbox"]});
 
   const page = await browser.newPage();
