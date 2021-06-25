@@ -8,7 +8,7 @@ app.use(cors());
 
 var jsonParser = bodyParser.json()
 
-app.post('/', jsonParser, async (resquest, response) => {
+app.post('/check', jsonParser, async (resquest, response) => {
 
   console.log('entrada post -->', resquest.body);
 
