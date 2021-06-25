@@ -10,10 +10,8 @@ var jsonParser = bodyParser.json()
 
 app.post('/check', jsonParser, async (resquest, response) => {
 
-  console.log('entrada post -->', resquest.body);
+  const browser = await puppeteer.launch({headless: true, args: ["--no-sandbox", "--disable-setuid-sandbox"]});
 
-  const browser = await puppeteer.launch({headless:false,args: ["--no-sandbox"]});
-  
   const page = await browser.newPage();
 
   await page.goto('https://watools.io/check-numbers');
