@@ -10,8 +10,6 @@ var jsonParser = bodyParser.json()
 
 app.post('/check', jsonParser, async (resquest, response) => {
 
-  // console.log('body --->', resquest.query.number);
-
   const browser = await puppeteer.launch({headless: true, args: ["--no-sandbox", "--disable-setuid-sandbox"]});
 
   const page = await browser.newPage();
@@ -26,18 +24,18 @@ app.post('/check', jsonParser, async (resquest, response) => {
   const getData = async() => {
     return await page.evaluate(async () => {
         return await new Promise(resolve => {
-          setTimeout(() => {
-                resolve([
-                  {validacao:document.querySelector('.number-exists').textContent},
-                  {erro:document.querySelector('[ng-show="error"]').textContent}
-                ]);
-          }, 3000)
+          setTimeout(()=>{
+            resolve([
+              {validacao:document.querySelector('.number-exists').textContent},
+              {erro:document.querySelector('[ng-show="error"]').textContent}
+            ]);
+          },4000)
       })
     })
   }
   results = await getData();
-  
   response.json(results);
+  
   await browser.close();
 });
 
