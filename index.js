@@ -10,7 +10,7 @@ var jsonParser = bodyParser.json()
 
 app.post('/check', jsonParser, async (resquest, response) => {
 
-  console.log('teste');
+  // console.log('body --->', resquest.query.number);
 
   const browser = await puppeteer.launch({headless: true, args: ["--no-sandbox", "--disable-setuid-sandbox"]});
 
@@ -18,7 +18,7 @@ app.post('/check', jsonParser, async (resquest, response) => {
 
   await page.goto('https://watools.io/check-numbers');
   await page.select('[ng-model="countryDialCode"]','string:+55');
-  await page.type('[ng-model="phone"]', `${resquest.body.number}`);
+  await page.type('[ng-model="phone"]', `${resquest.query.number}`);
   await page.click('[ng-click="checkNumber()"]');
 
   results = {};
